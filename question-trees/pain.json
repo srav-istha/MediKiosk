@@ -1,0 +1,276 @@
+{
+    "chief_complaint": "pain",
+    "version": "1.0",
+    "start": "site",
+    "questions": {
+        "site": {
+            "socrates_letter": "S",
+            "socrates_word": "Site",
+            "text": "Where is the pain?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "chest",
+                    "label": "Chest"
+                },
+                {
+                    "value": "abdomen",
+                    "label": "Stomach / Abdomen"
+                },
+                {
+                    "value": "head",
+                    "label": "Head"
+                },
+                {
+                    "value": "back",
+                    "label": "Back"
+                },
+                {
+                    "value": "limb",
+                    "label": "Arm / Leg"
+                },
+                {
+                    "value": "other",
+                    "label": "Somewhere else"
+                }
+            ],
+            "next": "onset"
+        },
+        "onset": {
+            "socrates_letter": "O",
+            "socrates_word": "Onset",
+            "text": "When did the pain start, and did it come on suddenly or gradually?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "sudden",
+                    "label": "Suddenly (seconds to minutes)"
+                },
+                {
+                    "value": "gradual_hours",
+                    "label": "Gradually, over hours"
+                },
+                {
+                    "value": "gradual_days",
+                    "label": "Gradually, over days or longer"
+                }
+            ],
+            "next": "character"
+        },
+        "character": {
+            "socrates_letter": "C",
+            "socrates_word": "Character",
+            "text": "How would you describe the pain?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "sharp",
+                    "label": "Sharp / stabbing"
+                },
+                {
+                    "value": "dull",
+                    "label": "Dull / aching"
+                },
+                {
+                    "value": "burning",
+                    "label": "Burning"
+                },
+                {
+                    "value": "crushing",
+                    "label": "Crushing / heavy pressure"
+                },
+                {
+                    "value": "cramping",
+                    "label": "Cramping"
+                },
+                {
+                    "value": "throbbing",
+                    "label": "Throbbing"
+                }
+            ],
+            "next": {
+                "crushing": "radiation_urgent",
+                "default": "radiation"
+            }
+        },
+        "radiation_urgent": {
+            "socrates_letter": "R",
+            "socrates_word": "Radiation",
+            "text": "Does the pain spread anywhere else, such as your arm, jaw, or back?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "arm",
+                    "label": "Yes, to the arm"
+                },
+                {
+                    "value": "jaw",
+                    "label": "Yes, to the jaw"
+                },
+                {
+                    "value": "back",
+                    "label": "Yes, to the back"
+                },
+                {
+                    "value": "none",
+                    "label": "No, it stays in one place"
+                }
+            ],
+            "next": "associated_urgent"
+        },
+        "radiation": {
+            "socrates_letter": "R",
+            "socrates_word": "Radiation",
+            "text": "Does the pain spread anywhere else?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "yes",
+                    "label": "Yes"
+                },
+                {
+                    "value": "none",
+                    "label": "No, it stays in one place"
+                }
+            ],
+            "next": "associated"
+        },
+        "associated_urgent": {
+            "socrates_letter": "A",
+            "socrates_word": "Associated symptoms",
+            "text": "Do you also have shortness of breath, sweating, or nausea?",
+            "type": "multi_choice",
+            "options": [
+                {
+                    "value": "breathlessness",
+                    "label": "Shortness of breath"
+                },
+                {
+                    "value": "sweating",
+                    "label": "Sweating"
+                },
+                {
+                    "value": "nausea",
+                    "label": "Nausea"
+                },
+                {
+                    "value": "none",
+                    "label": "None of these"
+                }
+            ],
+            "next": "time_course"
+        },
+        "associated": {
+            "socrates_letter": "A",
+            "socrates_word": "Associated symptoms",
+            "text": "Do you have any other symptoms along with the pain, such as fever, vomiting, or dizziness?",
+            "type": "multi_choice",
+            "options": [
+                {
+                    "value": "fever",
+                    "label": "Fever"
+                },
+                {
+                    "value": "vomiting",
+                    "label": "Vomiting"
+                },
+                {
+                    "value": "dizziness",
+                    "label": "Dizziness"
+                },
+                {
+                    "value": "none",
+                    "label": "None of these"
+                }
+            ],
+            "next": "time_course"
+        },
+        "time_course": {
+            "socrates_letter": "T",
+            "socrates_word": "Time course",
+            "text": "Has the pain been constant, or does it come and go?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "constant",
+                    "label": "Constant"
+                },
+                {
+                    "value": "intermittent",
+                    "label": "Comes and goes"
+                },
+                {
+                    "value": "worsening",
+                    "label": "Constant but getting worse"
+                }
+            ],
+            "next": "exacerbating"
+        },
+        "exacerbating": {
+            "socrates_letter": "E",
+            "socrates_word": "Exacerbating / relieving factors",
+            "text": "Does anything make the pain better or worse, such as movement, eating, or rest?",
+            "type": "single_choice",
+            "options": [
+                {
+                    "value": "worse_on_exertion",
+                    "label": "Worse with movement or exertion"
+                },
+                {
+                    "value": "worse_after_eating",
+                    "label": "Worse after eating"
+                },
+                {
+                    "value": "better_with_rest",
+                    "label": "Better with rest"
+                },
+                {
+                    "value": "no_clear_pattern",
+                    "label": "No clear pattern"
+                }
+            ],
+            "next": "severity"
+        },
+        "severity": {
+            "socrates_letter": "S2",
+            "socrates_word": "Severity",
+            "text": "On a scale of 1 to 10, how severe is the pain right now?",
+            "type": "scale",
+            "scale_min": 1,
+            "scale_max": 10,
+            "next": null
+        }
+    },
+    "red_flags": [
+        {
+            "id": "cardiac_emergency_pattern",
+            "condition": {
+                "site": "chest",
+                "character": "crushing"
+            },
+            "condition_any_of": {
+                "radiation_urgent": [
+                    "arm",
+                    "jaw"
+                ],
+                "associated_urgent": [
+                    "breathlessness",
+                    "sweating"
+                ]
+            },
+            "action": "priority_alert",
+            "message": "Possible cardiac emergency \u2014 crushing chest pain with radiation and/or breathlessness/sweating"
+        },
+        {
+            "id": "high_severity_sudden_onset",
+            "condition": {
+                "onset": "sudden"
+            },
+            "condition_min": {
+                "severity": 8
+            },
+            "action": "priority_alert",
+            "message": "Sudden-onset severe pain (8+/10) \u2014 recommend prompt triage review"
+        }
+    ]
+}
