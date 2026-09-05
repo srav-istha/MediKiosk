@@ -20,11 +20,9 @@ const MultiChoice = ({ question, value, onChange }) => {
     if (selected.includes(option)) {
       newSelected = selected.filter(s => s !== option);
     } else {
-      // Deselect "None of the above" when selecting anything else
       if (option !== 'None of the above') {
         newSelected = [...selected.filter(s => s !== 'None of the above'), option];
       } else {
-        // Select "None of the above" clears everything else
         newSelected = ['None of the above'];
         setOtherText('');
         onChange({ selected: newSelected, other: '' });
@@ -53,43 +51,30 @@ const MultiChoice = ({ question, value, onChange }) => {
 
   return (
     <div className="input-multi-choice">
-      {(question?.options || []).map((option, idx) => (
-        <div
-          key={idx}
-          className={`choice-card ${selected.includes(option) ? 'selected' : ''}`}
-          onClick={() => handleToggle(option)}
-          role="checkbox"
-          aria-checked={selected.includes(option)}
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              handleToggle(option);
-            }
-          }}
-        >
-          <span className="choice-card__checkbox" />
-          <span className="choice-card__label">{option}</span>
-        </div>
-      ))}
+      {(question?.options || []).map((option, idx) => {
+        const isSelected = selected.includes(option);
+        return (
+          <button
+            key={idx}
+            type="button"
+            className={`choice-card ${isSelected ? 'selected' : ''}`}
+            onClick={() => handleToggle(option)}
+          >
+            <span className="choice-card__checkbox" />
+            <span className="choice-card__label">{option}</span>
+          </button>
+        );
+      })}
 
       {/* Other option */}
-      <div
+      <button
+        type="button"
         className={`choice-card ${isOtherSelected ? 'selected' : ''}`}
         onClick={handleOtherToggle}
-        role="checkbox"
-        aria-checked={isOtherSelected}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleOtherToggle();
-          }
-        }}
       >
         <span className="choice-card__checkbox" />
         <span className="choice-card__label">Other</span>
-      </div>
+      </button>
 
       {isOtherSelected && (
         <div className="other-input animate-slide-up">

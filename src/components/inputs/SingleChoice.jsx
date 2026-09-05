@@ -6,25 +6,20 @@ import React from 'react';
 const SingleChoice = ({ question, value, onChange }) => {
   return (
     <div className="input-single-choice">
-      {(question?.options || []).map((option, idx) => (
-        <div
-          key={idx}
-          className={`choice-card ${value === option ? 'selected' : ''}`}
-          onClick={() => onChange(option)}
-          role="radio"
-          aria-checked={value === option}
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              onChange(option);
-            }
-          }}
-        >
-          <span className="choice-card__radio" />
-          <span className="choice-card__label">{option}</span>
-        </div>
-      ))}
+      {(question?.options || []).map((option, idx) => {
+        const isSelected = value === option;
+        return (
+          <button
+            key={idx}
+            type="button"
+            className={`choice-card ${isSelected ? 'selected' : ''}`}
+            onClick={() => onChange(option)}
+          >
+            <span className="choice-card__radio" />
+            <span className="choice-card__label">{option}</span>
+          </button>
+        );
+      })}
     </div>
   );
 };
