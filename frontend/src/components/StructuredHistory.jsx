@@ -12,9 +12,6 @@ const SECTION_ICONS = {
   'Review of Systems': '🔍',
 };
 
-/**
- * Format a raw answer value into a human-readable string.
- */
 function formatAnswer(question, value) {
   if (value === undefined || value === null || value === '') {
     return null;
@@ -50,13 +47,16 @@ function formatAnswer(question, value) {
   }
 }
 
-/**
- * StructuredHistory — Final summary screen for patient verification.
- * Displays all answers organized by clinical section, with print and export options.
- */
-export default function StructuredHistory({ questions, sections, answers, selectedLanguage, onStartOver, onGoBack }) {
-  
-  /** Group questions by section */
+export default function StructuredHistory({
+  questions,
+  sections,
+  answers,
+  selectedLanguage,
+  onStartOver,
+  onGoBack,
+  onGenerateSummary,
+  loadingSummary
+}) {
   const sectionData = useMemo(() => {
     return sections
       .map(section => {
@@ -71,12 +71,10 @@ export default function StructuredHistory({ questions, sections, answers, select
       .filter(s => s.items.length > 0);
   }, [questions, sections, answers]);
 
-  /** Export answers as JSON */
   const handleExportJSON = useCallback(() => {
     const exportData = {
       timestamp: new Date().toISOString(),
       language: selectedLanguage?.name || 'English',
-      languageCode: selectedLanguage?.id || 'en',
       interview: {},
     };
 
@@ -100,7 +98,6 @@ export default function StructuredHistory({ questions, sections, answers, select
     URL.revokeObjectURL(url);
   }, [sectionData, selectedLanguage, answers]);
 
-  /** Print the history */
   const handlePrint = useCallback(() => {
     window.print();
   }, []);
@@ -112,7 +109,7 @@ export default function StructuredHistory({ questions, sections, answers, select
         <div className="history-header__icon">✓</div>
         <h1 className="history-header__title">Interview Complete</h1>
         <p className="history-header__subtitle">
-          Please review your responses below to make sure everything is accurate
+          Please review your responses below to make sure everything is accurate before doctor review.
         </p>
       </div>
 
@@ -155,7 +152,20 @@ export default function StructuredHistory({ questions, sections, answers, select
         </div>
       ))}
 
-      {/* Action Buttons */}
+      {/* Primary Doctor Summary Trigger */}
+      {onGenerateSummary && (
+        <div className="summary-trigger-box">
+          <button
+            className="primary-button doctor-summary-btn"
+            onClick={onGenerateSummary}
+            disabled={loadingSummary}
+          >
+            {loadingSummary ? '⏳ Generating AI Doctor Summary...' : '👨‍⚕️ Proceed to Doctor Review & AI Summary →'}
+          </button>
+        </div>
+      )}
+
+      {/* Secondary Action Buttons */}
       <div className="history-actions">
         <button
           id="btn-go-back"
@@ -169,11 +179,11 @@ export default function StructuredHistory({ questions, sections, answers, select
           className="btn-action btn-action--secondary"
           onClick={handlePrint}
         >
-          🖨️ Print
+          🖨️ Print Report
         </button>
         <button
           id="btn-export-json"
-          className="btn-action btn-action--primary"
+          className="btn-action btn-action--secondary"
           onClick={handleExportJSON}
         >
           📥 Export JSON
@@ -183,7 +193,7 @@ export default function StructuredHistory({ questions, sections, answers, select
           className="btn-action btn-action--danger"
           onClick={onStartOver}
         >
-          🔄 Start New Interview
+          🔄 Start New Patient
         </button>
       </div>
     </div>

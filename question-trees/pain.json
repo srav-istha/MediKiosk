@@ -1,0 +1,116 @@
+{
+  "tree_id": "pain_socrates",
+  "name": "SOCRATES Pain Evaluation Tree",
+  "description": "Systematic clinical history elicitation based on the SOCRATES pain framework",
+  "sections": [
+    "Site",
+    "Onset",
+    "Character",
+    "Radiation",
+    "Associated Symptoms",
+    "Timing",
+    "Exacerbating & Relieving Factors",
+    "Severity"
+  ],
+  "questions": [
+    {
+      "id": "soc_site",
+      "section": "Site",
+      "text": "Where exactly is the pain located?",
+      "type": "body-diagram",
+      "required": true,
+      "placeholder": "Select pain regions on the body silhouette",
+      "options": []
+    },
+    {
+      "id": "soc_onset",
+      "section": "Onset",
+      "text": "When did the pain start and how did it begin?",
+      "type": "single-choice",
+      "required": true,
+      "options": [
+        "Sudden / Abrupt (started instantly)",
+        "Gradual (built up over hours/days)",
+        "Intermittent / Recurrent episode"
+      ]
+    },
+    {
+      "id": "soc_character",
+      "section": "Character",
+      "text": "How would you describe the character of the pain?",
+      "type": "multi-choice",
+      "required": true,
+      "options": [
+        "Sharp / Stabbing",
+        "Dull / Aching",
+        "Burning",
+        "Cramping / Colicky",
+        "Throbbing",
+        "Pressure / Heaviness"
+      ]
+    },
+    {
+      "id": "soc_radiation",
+      "section": "Radiation",
+      "text": "Does the pain radiate or spread anywhere else?",
+      "type": "yes-no",
+      "required": true,
+      "options": []
+    },
+    {
+      "id": "soc_radiation_details",
+      "section": "Radiation",
+      "text": "Where does the pain spread to?",
+      "type": "text",
+      "required": false,
+      "placeholder": "e.g., Radiates to back, left arm, jaw...",
+      "conditionalOn": {
+        "questionId": "soc_radiation",
+        "value": true
+      }
+    },
+    {
+      "id": "soc_associated",
+      "section": "Associated Symptoms",
+      "text": "Are you experiencing any accompanying symptoms?",
+      "type": "multi-choice",
+      "required": true,
+      "options": [
+        "Fever / Chills",
+        "Nausea / Vomiting",
+        "Shortness of breath",
+        "Sweating (Diaphoresis)",
+        "Dizziness / Lightheadedness",
+        "None of the above"
+      ]
+    },
+    {
+      "id": "soc_timing",
+      "section": "Timing",
+      "text": "Is the pain constant or does it come and go in waves?",
+      "type": "single-choice",
+      "required": true,
+      "options": [
+        "Continuous / Constant",
+        "Comes and goes in waves (Intermittent)",
+        "Only occurs during specific activities"
+      ]
+    },
+    {
+      "id": "soc_exacerbating",
+      "section": "Exacerbating & Relieving Factors",
+      "text": "Does anything make the pain better or worse?",
+      "type": "text",
+      "required": false,
+      "placeholder": "e.g., Rest helps, eating makes it worse..."
+    },
+    {
+      "id": "soc_severity",
+      "section": "Severity",
+      "text": "On a scale of 1 to 10, how severe is your pain right now?",
+      "type": "scale",
+      "required": true,
+      "options": []
+    }
+  ]
+}
